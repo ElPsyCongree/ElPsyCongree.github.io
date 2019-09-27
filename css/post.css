@@ -96,8 +96,23 @@
   display: inline-block;
   background: #ff2a2a;
   border: 0.1em solid #f5c6cb;
-  padding: 0.15em;
   line-height: 1.2em;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight: normal;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .post .post-footer .post-tags .post-tag:nth-child(2n) {
   background: #37cf38;

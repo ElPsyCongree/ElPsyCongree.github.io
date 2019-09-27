@@ -528,18 +528,14 @@ a.img-link:hover img {
   margin: 0 0 1em 0;
 }
 .morebtn {
-  display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
   font-size: 12px;
   font-weight: normal;
-  line-height: 1.428571429;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
-  border: 1px solid transparent;
-  border-radius: 4px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -669,6 +665,11 @@ code {
   font-feature-settings: "liga" 0; /* No variation */
 }
 button.copy {
+  background: #008000;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight: normal;
   -webkit-transition: 0.2s ease-in-out;
   -moz-transition: 0.2s ease-in-out;
   -o-transition: 0.2s ease-in-out;

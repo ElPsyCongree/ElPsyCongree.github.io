@@ -240,7 +240,18 @@
 <figure class="hljs highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">push</span> <span class="hljs-built_in">ebp</span>  //在栈中保存 栈顶的指针  (就是返回到xxx的上一个栈元素)<br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ebp</span> , <span class="hljs-built_in">esp</span>   <br><span class="hljs-keyword">sub</span> <span class="hljs-built_in">esp</span> , <span class="hljs-number">10</span><br>...<br>...<br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">esp</span> , <span class="hljs-built_in">ebp</span><br><span class="hljs-keyword">pop</span> <span class="hljs-built_in">ebp</span><br></code></pre></td></tr></table></figure>
 
 <p>如下这样的格式</p>
-<p>|<br>-|<br>本层的临时参数2|<br>本层的临时参数1|<br>ebp保存的当前栈底的值|<br>返回到上一层的call xxxxx|<br>参数1|<br>参数2|<br>参数3|<br>参数4|<br>|<br>(注意：越往下地址越小)</p>
+<table border="1">
+<tr><td><center>0x1C</center></td><td><center>缓存寄存器1</center></td></tr>
+<tr><td><center>0x18</center></td><td><center>...</center></td></tr>
+<tr><td><center>...</center></td><td><center>缓存寄存器x</center></td></tr>
+<tr><td><center>0x10</center></td><td><center>当前的ebp</center></td></tr>
+<tr><td><center>0x0C</center></td><td><center>调用函数的返回地址</center></td></tr>
+<tr><td><center>0x08</center></td><td><center>参数1</center></td></tr>
+<tr><td><center>...</center></td><td><center>...</center></td></tr>
+<tr><td><center>0x00</center></td><td><center>参数x</center></td></tr>
+</table>
+
+<p>(注意：越往下地址越小)</p>
 <p>可以看出来，ebp + 4 保存的是上层call的地址<br><br>[ebp + 8] 是参数1 <br><br>同理，类推。<br></p>
 <p>ESP寄存器分析：</p>
 <p>在游戏逆向中，如何遇到<br>mov ecx , [esp + 20] //栈顶指针 + 偏移的格式</p>
