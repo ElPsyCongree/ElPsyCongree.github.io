@@ -173,7 +173,11 @@
         
         <li role="menuitem"><a href="/" class="current"><i class="fas fa-home"></i><span class="menu-text">首页</span></a></li>
         
-        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">归档</span></a></li>
+        <li role="menuitem"><a href="/archives/"><i class="fas fa-archive"></i><span class="menu-text">文章列表</span></a></li>
+        
+        <li role="menuitem"><a href="/categories/"><i class="fas fa-th-list"></i><span class="menu-text">分类</span></a></li>
+        
+        <li role="menuitem"><a href="/tags/"><i class="fas fa-tags"></i><span class="menu-text">标签</span></a></li>
         
       </ul>
     </nav>
@@ -188,6 +192,78 @@
             
 
 <div id="index" class="index page">
+  
+  <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/27/汇编基本指令复习，以及逆向中如何跟esp-ebp参数/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="Leinlin">
+        <meta itemprop="description" content>
+        <meta itemprop="image" content="/images/avatar.jpg">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="游戏杂记">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2019/09/27/汇编基本指令复习，以及逆向中如何跟esp-ebp参数/" itemprop="url">汇编基本指令复习，以及逆向中如何跟esp ,ebp参数</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-09-27T12:41:14+08:00">2019-09-27 12:41:14</time></span>
+        </span>
+        
+        
+        
+        <span class="post-meta-divider divider">|</span>
+        
+        <span class="post-categories">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/汇编逆向/" itemprop="url" rel="index"><span itemprop="name">汇编逆向</span></a></span>
+        </span>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <h2 id="一些常用的汇编指令直观翻译"><a href="#一些常用的汇编指令直观翻译" class="headerlink" title="一些常用的汇编指令直观翻译"></a>一些常用的汇编指令直观翻译</h2><figure class="hljs highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span> , <span class="hljs-built_in">ebx</span>   // <span class="hljs-built_in">eax</span> = <span class="hljs-built_in">ebx</span><br><span class="hljs-keyword">lea</span> <span class="hljs-built_in">eax</span> , [<span class="hljs-built_in">ebx</span> + <span class="hljs-number">30</span>] // <span class="hljs-built_in">eax</span> = <span class="hljs-built_in">ebx</span> + <span class="hljs-number">30</span><br><span class="hljs-keyword">push</span> <span class="hljs-keyword">pop</span>  //入栈，出栈<br>pushax popax //全部入栈，全部出栈<br><span class="hljs-keyword">add</span> <span class="hljs-built_in">eax</span>,<span class="hljs-number">5</span> // <span class="hljs-built_in">eax</span> += <span class="hljs-number">5</span><br><span class="hljs-keyword">sub</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">5</span> //<span class="hljs-built_in">eax</span> -= <span class="hljs-number">6</span><br><span class="hljs-keyword">inc</span> <span class="hljs-built_in">eax</span>  // <span class="hljs-built_in">eax</span> += <span class="hljs-number">1</span><br><span class="hljs-keyword">mul</span>  //乘法<br><span class="hljs-keyword">div</span>  //除法<br></code></pre></td></tr></table></figure>
+
+<h2 id="堆栈学习"><a href="#堆栈学习" class="headerlink" title="堆栈学习"></a>堆栈学习</h2><p>ESP   栈顶指针 <br><br>EBP栈底指针 (本层CALL的栈底)<br><br>注意栈的地址是越push越小的<br></p>
+<h2 id="改变堆栈的操作"><a href="#改变堆栈的操作" class="headerlink" title="改变堆栈的操作"></a>改变堆栈的操作</h2><figure class="hljs highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">push</span> <span class="hljs-built_in">eax</span>   // <span class="hljs-keyword">sub</span> <span class="hljs-built_in">esp</span> , <span class="hljs-number">4</span>  <span class="hljs-keyword">mov</span> [<span class="hljs-built_in">esp</span>] , <span class="hljs-built_in">eax</span><br><span class="hljs-keyword">pop</span> <span class="hljs-built_in">eax</span>    // <span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span> , [<span class="hljs-built_in">esp</span>]   <span class="hljs-keyword">add</span> <span class="hljs-built_in">esp</span> , <span class="hljs-number">4</span><br><span class="hljs-keyword">call</span> <span class="hljs-number">1234</span>  // <span class="hljs-keyword">push</span> <span class="hljs-built_in">eip</span>   <span class="hljs-keyword">jmp</span> <span class="hljs-number">1234</span><br><span class="hljs-keyword">retn</span> <span class="hljs-number">8</span>     // <span class="hljs-keyword">pop</span> <span class="hljs-built_in">eip</span>   <span class="hljs-keyword">add</span> <span class="hljs-built_in">esp</span> , <span class="hljs-number">8</span>   <span class="hljs-built_in">eip</span>表示下步要执行的地址<br><span class="hljs-keyword">add</span> <span class="hljs-built_in">esp</span> , xxx<br><span class="hljs-keyword">sub</span> <span class="hljs-built_in">esp</span> , xxx<br></code></pre></td></tr></table></figure>
+
+<h2 id="栈底指针的学习"><a href="#栈底指针的学习" class="headerlink" title="栈底指针的学习"></a>栈底指针的学习</h2><p>在逆向过程中，如果遇到 </p>
+<figure class="hljs highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span> , [<span class="hljs-built_in">ebp</span> + <span class="hljs-number">8</span>]<br></code></pre></td></tr></table></figure>
+
+<p>这样的如何去跟</p>
+<p>这样的就需要把<code>[ebp+8]</code>看成一个整体来处理</p>
+<p>跟进CALL里面看，可以看到这样的代码</p>
+<figure class="hljs highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">push</span> <span class="hljs-built_in">ebp</span>  //在栈中保存 栈顶的指针  (就是返回到xxx的上一个栈元素)<br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">ebp</span> , <span class="hljs-built_in">esp</span>   <br><span class="hljs-keyword">sub</span> <span class="hljs-built_in">esp</span> , <span class="hljs-number">10</span><br>...<br>...<br><span class="hljs-keyword">mov</span> <span class="hljs-built_in">esp</span> , <span class="hljs-built_in">ebp</span><br><span class="hljs-keyword">pop</span> <span class="hljs-built_in">ebp</span><br></code></pre></td></tr></table></figure>
+
+<p>如下这样的格式</p>
+<p>|<br>-|<br>本层的临时参数2|<br>本层的临时参数1|<br>ebp保存的当前栈底的值|<br>返回到上一层的call xxxxx|<br>参数1|<br>参数2|<br>参数3|<br>参数4|<br>|<br>(注意：越往下地址越小)</p>
+<p>可以看出来，ebp + 4 保存的是上层call的地址<br><br>[ebp + 8] 是参数1 <br><br>同理，类推。<br></p>
+<p>ESP寄存器分析：</p>
+<p>在游戏逆向中，如何遇到<br>mov ecx , [esp + 20] //栈顶指针 + 偏移的格式</p>
+<p>首先要确定[esp + 20]是局部变量，还是参数</p>
+<p>那么如何确定呢？</p>
+<p>有下面两个办法</p>
+<p>1.通过手工的算在本层CALL中的堆栈的偏移，然后得到 [esp + 20]的具体位置<br><br>2.查看距离当前堆栈esp的位置，（注意esp越push值越小）<br><br>如果正好20在上层call的函数下面，那么就是上层call的参数<br><br>如何在上层call的上面，那么就是局部变量，就需要在call内部进行分析了</p>
+
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        <a class="post-tag button" href="/tags/汇编逆向/" rel="tag"><i class="fas fa-tags"></i>汇编逆向</a>
+        
+      </div>
+      
+    </footer>
+  </article>
   
   <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
@@ -211,6 +287,14 @@
           <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-09-23T14:05:04+08:00">2019-09-23 14:05:04</time></span>
         </span>
         
+        
+        
+        <span class="post-meta-divider divider">|</span>
+        
+        <span class="post-categories">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/汇编逆向/" itemprop="url" rel="index"><span itemprop="name">汇编逆向</span></a></span>
+        </span>
         
         
       </div>
@@ -241,6 +325,16 @@
       
     </main>
     <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        <a class="post-tag button" href="/tags/bugly/" rel="tag"><i class="fas fa-tags"></i>bugly</a>
+        
+        <a class="post-tag button" href="/tags/libunity-sym-so/" rel="tag"><i class="fas fa-tags"></i>libunity.sym.so</a>
+        
+        <a class="post-tag button" href="/tags/符号表还原/" rel="tag"><i class="fas fa-tags"></i>符号表还原</a>
+        
+      </div>
       
     </footer>
   </article>
@@ -275,8 +369,22 @@
     
     
     <div class="archives-count count-block">
-      <div class="site-count-title">归档</div>
-      <div><a href="/archives/">1</a></div>
+      <div class="site-count-title">文章列表</div>
+      <div><a href="/archives/">2</a></div>
+    </div>
+    
+    
+    
+    <div class="categories-count count-block">
+      <div class="site-count-title">分类</div>
+      <div><a href="/categories/">2</a></div>
+    </div>
+    
+    
+    
+    <div class="tags-count count-block">
+      <div class="site-count-title">标签</div>
+      <div><a href="/tags/">5</a></div>
     </div>
     
     

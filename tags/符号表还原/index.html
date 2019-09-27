@@ -154,7 +154,7 @@
     </script>
     
     <script defer type="text/javascript" src="/js/custom.js"></script>
-    <title>Android Unity 符号表上传 | 游戏杂记</title>
+    <title>标签: 符号表还原 | 游戏杂记</title>
   </head>
   <body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN" data-spy="scroll" data-target=".list-group">
     
@@ -190,89 +190,21 @@
         <div class="main-container">
           <div class="content">
             
-<div id="post" class="page">
+<div id="tag" class="tag page">
+  <h1 class="page-title">符号表还原</h1>
   
   <article class="article post card animate" itemscope itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/23/bugly-symbol/">
-      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-       <meta itemprop="name" content="Leinlin">
-       <meta itemprop="description" content>
-       <meta itemprop="image" content="/images/avatar.jpg">
+    <header id="post-header" class="post-header">
+      <h1 class="post-title-simple" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2019/09/23/bugly-symbol/" itemprop="url">Android Unity 符号表上传</a>
+      </h1>
+      
+      <span class="post-date">
+        <time title="post-date" itemprop="dateCreated datePublished" datetime="2019-09-23T14:05:04+08:00">09-23</time>
       </span>
-      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-       <meta itemprop="name" content="游戏杂记">
-      </span>
-    </div>
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">Android Unity 符号表上传</h1>
-      <div class="post-meta">
-        
-        <span class="post-date">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2019-09-23T14:05:04+08:00">2019-09-23 14:05:04</time></span>
-        </span>
-        
-        
-        
-        <span class="post-meta-divider divider">|</span>
-        
-        <span class="post-categories">
-          
-          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/汇编逆向/" itemprop="url" rel="index"><span itemprop="name">汇编逆向</span></a></span>
-        </span>
-        
-        
-      </div>
+      
     </header>
-    <main class="post-main" itemprop="articleBody">
-      <h2 id="Why-do-it"><a href="#Why-do-it" class="headerlink" title="Why do it"></a>Why do it</h2><p>最近游戏内测，发现不少崩溃的堆栈发生在libunity.so之中，而大部分仅仅给一个代码执行到的PC地址，查起来代码比较蛋疼。</p>
-<figure class="hljs highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs C#">#00 pc 00a6ac38 /data/app/.../libunity.so<br>#01 pc 00a6c128 /data/app/.../x86/libunity.so<br>#02 pc 003f1bf6 /data/app/.../x86/libunity.so <br>#03 pc 003f0b4a /data/app/.../x86/libunity.so <br>#04 pc 0039ff68 /data/app/.../x86/libunity.so <br>#05 pc 00396e77 /data/app/.../x86/libunity.so <br>#06 pc 00398ce0 /data/app/.../x86/libunity.so <br>#07 pc 00398149 /data/app/.../x86/libunity.so <br>#08 pc 003980a2 /data/app/.../x86/libunity.so <br>#09 pc 004f2ca3 /data/app/.../x86/libunity.so<br></code></pre></td></tr></table></figure>
-
-<p>这种一般没有符号表，不过我们可以使用addr2line这个经典的binutils工具将PC地址转换为函数名</p>
-<figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">./i686-linux-android-addr2line.exe -C -i -f -e libunity.sym.so 00a6ac38<br></code></pre></td></tr></table></figure>
-
-<p>输出结果如下:<br></p>
-<figure class="hljs highlight C"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs C">mecanim::statemachine::EvaluateState(mecanim::ValueArrayConstant <span class="hljs-keyword">const</span>&amp;, mecanim::statemachine::StateConstant <span class="hljs-keyword">const</span>&amp;, mecanim::statemachine::StateMachineInput <span class="hljs-keyword">const</span>&amp;, mecanim::statemachine::StateMachineOutput&amp;, mecanim::statemachine::StateMachineMemory&amp;, mecanim::statemachine::StateOutput&amp;, mecanim::statemachine::StateWorkspace&amp;, <span class="hljs-keyword">bool</span>, <span class="hljs-keyword">bool</span>)<br></code></pre></td></tr></table></figure>
-
-<p>我们很快就可以定位到是一个动画状态机的问题，不过问题也接踵而至,BUG量有点多，然后一起看BUGLY的人也不少，客户端的其他人未必懂这些底层知识，那么其实就可以利用Bugly的符号表功能来做这件事情。</p>
-<h2 id="How-to-do"><a href="#How-to-do" class="headerlink" title="How to do"></a>How to do</h2><p>首先去<a href="https://bugly.qq.com/v2/sdkDownload" target="_blank" rel="noopener">Bugly官网</a>上下载最新的符号表导出工具</p>
-<p>Android Unity的符号表路径在Editor\Data\PlaybackEngines\AndroidPlayer\Variations</p>
-<p>搜索libunity.sym.so即可,注意MONO和IL2CPP要对应上传,输入导出和上传指令</p>
-
-<figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">java -jar buglySymbolAndroid.jar -i libunity.sym.so -u -id <span class="hljs-variable">$yourappid</span> -key <span class="hljs-variable">$yourappkey</span> -package <span class="hljs-variable">$packagename</span> -version xx.xx.xx<br></code></pre></td></tr></table></figure>
-
-<p>在BUGLY界面中打开界面，如果看到对应的符号表已上传就说明成功了<br><br><img src="../../images/symbol_success.png" alt="成功截图"><br><br>报错堆栈变成</p>
-<figure class="hljs highlight C"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs C">#<span class="hljs-number">00</span> pc <span class="hljs-number">00</span>a6ac38 libunity.so mecanim::statemachine::EvaluateState(mecanim::ValueArrayConstant <span class="hljs-keyword">const</span>&amp;, mecanim::statemachine::StateConstant <span class="hljs-keyword">const</span>&amp;, mecanim::statemachine::StateMachineInput <span class="hljs-keyword">const</span>&amp;, mecanim::statemachine::StateMachineOutput&amp;, mecanim::statemachine::StateMachineMemory&amp;, mecanim::statemachine::StateOutput&amp;, mecanim::statemachine::StateWorkspace&amp;, <span class="hljs-keyword">bool</span>, <span class="hljs-keyword">bool</span>) [x86]<br>#<span class="hljs-number">01</span> pc <span class="hljs-number">00</span>a6c128 libunity.so mecanim::statemachine::SetStateMachineInInitialState(mecanim::statemachine::StateMachineConstant <span class="hljs-keyword">const</span>&amp;, mecanim::statemachine::StateMachineInput <span class="hljs-keyword">const</span>&amp;, mecanim::statemachine::StateMachineOutput&amp;, mecanim::statemachine::StateMachineMemory&amp;, mecanim::statemachine::StateMachineWorkspace&amp;) [x86]<br>#<span class="hljs-number">02</span> pc <span class="hljs-number">003f</span>1bf6 libunity.so AnimatorControllerPlayable::GenerateGraph() [x86]<br>#<span class="hljs-number">03</span> pc <span class="hljs-number">003f</span>0b4a libunity.so AnimatorControllerPlayable::SetAnimatorController(RuntimeAnimatorController*) [x86]<br>#<span class="hljs-number">04</span> pc <span class="hljs-number">0039f</span>f68 libunity.so Animator::CreateInternalControllerPlayable() [x86]<br>#<span class="hljs-number">05</span> pc <span class="hljs-number">00396e77</span> libunity.so Animator::CreateObject() [x86]<br>#<span class="hljs-number">06</span> pc <span class="hljs-number">00398</span>ce0 libunity.so Animator::Prepare() [x86]<br></code></pre></td></tr></table></figure>
-
-<h2 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h2><p>将Addr2Line与IDA结合，定位报错汇编码</p>
-
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        
-        <a class="post-tag button" href="/tags/bugly/" rel="tag"><i class="fas fa-tags"></i>bugly</a>
-        
-        <a class="post-tag button" href="/tags/libunity-sym-so/" rel="tag"><i class="fas fa-tags"></i>libunity.sym.so</a>
-        
-        <a class="post-tag button" href="/tags/符号表还原/" rel="tag"><i class="fas fa-tags"></i>符号表还原</a>
-        
-      </div>
-      
-    </footer>
   </article>
-  
-  
-  <nav class="page-nav">
-    <div class="page-nav-next page-nav-item">
-      
-    </div>
-    <div class="page-nav-prev page-nav-item">
-      
-      <a href="/2019/09/27/汇编基本指令复习，以及逆向中如何跟esp-ebp参数/" rel="prev" title="汇编基本指令复习，以及逆向中如何跟esp ,ebp参数"><span class="nav-title">汇编基本指令复习，以及逆向中如何跟esp ,ebp参数</span><i class="fas fa-angle-right"></i></a>
-      
-    </div>
-  </nav>
   
   
 </div>
@@ -332,17 +264,6 @@
 
 
   <div class="sidebar-sticky">
-    
-    
-    
-    
-    
-    <hr>
-    <div class="post-toc sidebar-item" id="toc-div">
-      <div><i class="fas fa-list-ol"></i>文章目录</div>
-      <div class="post-toc-content"><ol class="list-group toc"><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#Why-do-it"><span class="toc-text">Why do it</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#How-to-do"><span class="toc-text">How to do</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#Future"><span class="toc-text">Future</span></a></li></ol></div>
-    </div>
-    
     
     
     <hr>
