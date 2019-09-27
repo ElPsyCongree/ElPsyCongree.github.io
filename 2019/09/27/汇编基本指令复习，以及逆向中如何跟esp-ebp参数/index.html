@@ -228,6 +228,7 @@
       <h2 id="一些常用的汇编指令直观翻译"><a href="#一些常用的汇编指令直观翻译" class="headerlink" title="一些常用的汇编指令直观翻译"></a>一些常用的汇编指令直观翻译</h2><figure class="hljs highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span> , <span class="hljs-built_in">ebx</span>   // <span class="hljs-built_in">eax</span> = <span class="hljs-built_in">ebx</span><br><span class="hljs-keyword">lea</span> <span class="hljs-built_in">eax</span> , [<span class="hljs-built_in">ebx</span> + <span class="hljs-number">30</span>] // <span class="hljs-built_in">eax</span> = <span class="hljs-built_in">ebx</span> + <span class="hljs-number">30</span><br><span class="hljs-keyword">push</span> <span class="hljs-keyword">pop</span>  //入栈，出栈<br>pushax popax //全部入栈，全部出栈<br><span class="hljs-keyword">add</span> <span class="hljs-built_in">eax</span>,<span class="hljs-number">5</span> // <span class="hljs-built_in">eax</span> += <span class="hljs-number">5</span><br><span class="hljs-keyword">sub</span> <span class="hljs-built_in">eax</span>, <span class="hljs-number">5</span> //<span class="hljs-built_in">eax</span> -= <span class="hljs-number">6</span><br><span class="hljs-keyword">inc</span> <span class="hljs-built_in">eax</span>  // <span class="hljs-built_in">eax</span> += <span class="hljs-number">1</span><br><span class="hljs-keyword">mul</span>  //乘法<br><span class="hljs-keyword">div</span>  //除法<br></code></pre></td></tr></table></figure>
 
 <h2 id="堆栈学习"><a href="#堆栈学习" class="headerlink" title="堆栈学习"></a>堆栈学习</h2><p>ESP   栈顶指针 <br><br>EBP栈底指针 (本层CALL的栈底)<br><br>注意栈的地址是越push越小的<br></p>
+<a id="more"></a>
 <h2 id="改变堆栈的操作"><a href="#改变堆栈的操作" class="headerlink" title="改变堆栈的操作"></a>改变堆栈的操作</h2><figure class="hljs highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">push</span> <span class="hljs-built_in">eax</span>   // <span class="hljs-keyword">sub</span> <span class="hljs-built_in">esp</span> , <span class="hljs-number">4</span>  <span class="hljs-keyword">mov</span> [<span class="hljs-built_in">esp</span>] , <span class="hljs-built_in">eax</span><br><span class="hljs-keyword">pop</span> <span class="hljs-built_in">eax</span>    // <span class="hljs-keyword">mov</span> <span class="hljs-built_in">eax</span> , [<span class="hljs-built_in">esp</span>]   <span class="hljs-keyword">add</span> <span class="hljs-built_in">esp</span> , <span class="hljs-number">4</span><br><span class="hljs-keyword">call</span> <span class="hljs-number">1234</span>  // <span class="hljs-keyword">push</span> <span class="hljs-built_in">eip</span>   <span class="hljs-keyword">jmp</span> <span class="hljs-number">1234</span><br><span class="hljs-keyword">retn</span> <span class="hljs-number">8</span>     // <span class="hljs-keyword">pop</span> <span class="hljs-built_in">eip</span>   <span class="hljs-keyword">add</span> <span class="hljs-built_in">esp</span> , <span class="hljs-number">8</span>   <span class="hljs-built_in">eip</span>表示下步要执行的地址<br><span class="hljs-keyword">add</span> <span class="hljs-built_in">esp</span> , xxx<br><span class="hljs-keyword">sub</span> <span class="hljs-built_in">esp</span> , xxx<br></code></pre></td></tr></table></figure>
 
 <h2 id="栈底指针的学习"><a href="#栈底指针的学习" class="headerlink" title="栈底指针的学习"></a>栈底指针的学习</h2><p>在逆向过程中，如果遇到 </p>
@@ -309,14 +310,14 @@
     
     <div class="categories-count count-block">
       <div class="site-count-title">分类</div>
-      <div><a href="/categories/">2</a></div>
+      <div><a href="/categories/">1</a></div>
     </div>
     
     
     
     <div class="tags-count count-block">
       <div class="site-count-title">标签</div>
-      <div><a href="/tags/">5</a></div>
+      <div><a href="/tags/">4</a></div>
     </div>
     
     

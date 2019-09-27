@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-27T09:14:09.534Z</updated>
+  <updated>2019-09-27T09:41:34.745Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,17 +21,13 @@
     <link href="http://yoursite.com/2019/09/27/%E6%B1%87%E7%BC%96%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4%E5%A4%8D%E4%B9%A0%EF%BC%8C%E4%BB%A5%E5%8F%8A%E9%80%86%E5%90%91%E4%B8%AD%E5%A6%82%E4%BD%95%E8%B7%9Fesp-ebp%E5%8F%82%E6%95%B0/"/>
     <id>http://yoursite.com/2019/09/27/汇编基本指令复习，以及逆向中如何跟esp-ebp参数/</id>
     <published>2019-09-27T04:41:14.000Z</published>
-    <updated>2019-09-27T09:14:09.534Z</updated>
+    <updated>2019-09-27T09:41:34.745Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;一些常用的汇编指令直观翻译&quot;&gt;&lt;a href=&quot;#一些常用的汇编指令直观翻译&quot; class=&quot;headerlink&quot; title=&quot;一些常用的汇编指令直观翻译&quot;&gt;&lt;/a&gt;一些常用的汇编指令直观翻译&lt;/h2&gt;&lt;figure class=&quot;hljs
-        
-      
+      &lt;h2 id=&quot;一些常用的汇编指令直观翻译&quot;&gt;&lt;a href=&quot;#一些常用的汇编指令直观翻译&quot; class=&quot;headerlink&quot; title=&quot;一些常用的汇编指令直观翻译&quot;&gt;&lt;/a&gt;一些常用的汇编指令直观翻译&lt;/h2&gt;&lt;figure class=&quot;hljs highlight x86asm&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs x86asm&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;mov&lt;/span&gt; &lt;span class=&quot;hljs-built_in&quot;&gt;eax&lt;/span&gt; , &lt;span class=&quot;hljs-built_in&quot;&gt;ebx&lt;/span&gt;   // &lt;span class=&quot;hljs-built_in&quot;&gt;eax&lt;/span&gt; = &lt;span class=&quot;hljs-built_in&quot;&gt;ebx&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;lea&lt;/span&gt; &lt;span class=&quot;hljs-built_in&quot;&gt;eax&lt;/span&gt; , [&lt;span class=&quot;hljs-built_in&quot;&gt;ebx&lt;/span&gt; + &lt;span class=&quot;hljs-number&quot;&gt;30&lt;/span&gt;] // &lt;span class=&quot;hljs-built_in&quot;&gt;eax&lt;/span&gt; = &lt;span class=&quot;hljs-built_in&quot;&gt;ebx&lt;/span&gt; + &lt;span class=&quot;hljs-number&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;push&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;pop&lt;/span&gt;  //入栈，出栈&lt;br&gt;pushax popax //全部入栈，全部出栈&lt;br&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;add&lt;/span&gt; &lt;span class=&quot;hljs-built_in&quot;&gt;eax&lt;/span&gt;,&lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; // &lt;span class=&quot;hljs-built_in&quot;&gt;eax&lt;/span&gt; += &lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;sub&lt;/span&gt; &lt;span class=&quot;hljs-built_in&quot;&gt;eax&lt;/span&gt;, &lt;span class=&quot;hljs-number&quot;&gt;5&lt;/span&gt; //&lt;span class=&quot;hljs-built_in&quot;&gt;eax&lt;/span&gt; -= &lt;span class=&quot;hljs-number&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;inc&lt;/span&gt; &lt;span class=&quot;hljs-built_in&quot;&gt;eax&lt;/span&gt;  // &lt;span class=&quot;hljs-built_in&quot;&gt;eax&lt;/span&gt; += &lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;mul&lt;/span&gt;  //乘法&lt;br&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;div&lt;/span&gt;  //除法&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;h2 id=&quot;堆栈学习&quot;&gt;&lt;a href=&quot;#堆栈学习&quot; class=&quot;headerlink&quot; title=&quot;堆栈学习&quot;&gt;&lt;/a&gt;堆栈学习&lt;/h2&gt;&lt;p&gt;ESP   栈顶指针 &lt;br&gt;&lt;br&gt;EBP栈底指针 (本层CALL的栈底)&lt;br&gt;&lt;br&gt;注意栈的地址是越push越小的&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
@@ -48,17 +44,12 @@
     <link href="http://yoursite.com/2019/09/23/bugly-symbol/"/>
     <id>http://yoursite.com/2019/09/23/bugly-symbol/</id>
     <published>2019-09-23T06:05:04.804Z</published>
-    <updated>2019-09-27T09:17:41.472Z</updated>
+    <updated>2019-09-27T09:41:28.715Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;h2 id=&quot;Why-do-it&quot;&gt;&lt;a href=&quot;#Why-do-it&quot; class=&quot;headerlink&quot; title=&quot;Why do it&quot;&gt;&lt;/a&gt;Why do
-        
-      
+      &lt;h2 id=&quot;Why-do-it&quot;&gt;&lt;a href=&quot;#Why-do-it&quot; class=&quot;headerlink&quot; title=&quot;Why do it&quot;&gt;&lt;/a&gt;Why do it&lt;/h2&gt;&lt;p&gt;最近游戏内测，发现不少崩溃的堆栈发生在libunity.so之中，而大部分仅仅给一个代码执行到的PC地址，查起来代码比较蛋疼。&lt;/p&gt;
+&lt;figure class=&quot;hljs highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;hljs C#&quot;&gt;#00 pc 00a6ac38 /data/app/.../libunity.so&lt;br&gt;#01 pc 00a6c128 /data/app/.../x86/libunity.so&lt;br&gt;#02 pc 003f1bf6 /data/app/.../x86/libunity.so &lt;br&gt;#03 pc 003f0b4a /data/app/.../x86/libunity.so &lt;br&gt;#04 pc 0039ff68 /data/app/.../x86/libunity.so &lt;br&gt;#05 pc 00396e77 /data/app/.../x86/libunity.so &lt;br&gt;#06 pc 00398ce0 /data/app/.../x86/libunity.so &lt;br&gt;#07 pc 00398149 /data/app/.../x86/libunity.so &lt;br&gt;#08 pc 003980a2 /data/app/.../x86/libunity.so &lt;br&gt;#09 pc 004f2ca3 /data/app/.../x86/libunity.so&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
