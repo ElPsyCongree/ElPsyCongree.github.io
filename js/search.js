@@ -165,12 +165,12 @@ function onInput(input, resultContent, datas) {
     li.push("\" class=\"search-result-title\">");
     li.push(buildHighlightedTitle(matchedDataProps[i]));
     li.push("</a>");
-    li.push("<p class=\"search-result-content\">...");
-    var sliceArray = buildSortedSliceArray(matchedDataProps[i])
-    var mergedSliceArray = mergeSliceArray(sliceArray);
-    // Highlight keyword.
-    li.push(buildHighlightedContent(matchedDataProps[i], mergedSliceArray));
-    li.push("...</p>");
+    // li.push("<p class=\"search-result-content\">...");
+    // var sliceArray = buildSortedSliceArray(matchedDataProps[i])
+    // var mergedSliceArray = mergeSliceArray(sliceArray);
+    // // Highlight keyword.
+    // li.push(buildHighlightedContent(matchedDataProps[i], mergedSliceArray));
+    // li.push("...</p>");
   }
   li.push("</ul>");
   resultContent.innerHTML = li.join("");
