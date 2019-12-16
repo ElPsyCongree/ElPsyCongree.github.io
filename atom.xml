@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-13T02:49:18.502Z</updated>
+  <updated>2019-12-16T08:06:49.326Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2019/12/16/luajit-value/"/>
+    <id>http://yoursite.com/2019/12/16/luajit-value/</id>
+    <published>2019-12-16T07:47:48.577Z</published>
+    <updated>2019-12-16T08:06:49.326Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Lua是动态类型的编程语言，变量的值可以是数值、字符串、table等所有支持的数据类型。在Lua虚拟机中每个变量都是用一个TValue结构体表示。LuaJIT出于效率的考虑重新组织了TValue结构体。&lt;/p&gt;
+&lt;h2 id=&quot;lua-5-1中的TValue结构&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>汇编调用指令，堆栈操作详解</title>
@@ -42,7 +66,7 @@
     <link href="http://yoursite.com/2019/09/23/bugly-symbol/"/>
     <id>http://yoursite.com/2019/09/23/bugly-symbol/</id>
     <published>2019-09-23T06:05:04.804Z</published>
-    <updated>2019-11-13T02:49:36.723Z</updated>
+    <updated>2019-12-16T08:06:54.434Z</updated>
     
     <summary type="html">
     
